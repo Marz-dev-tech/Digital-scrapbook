@@ -1,0 +1,137 @@
+/*General styles*/
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(to bottom, #6c49a1, #1e3c72, #000000, #1e3c72);/*Maybe customize it more*/
+    background-size: 300% 300%;
+    animation: smoothTransition 100s infinite;
+    /*font-family: Arial, sans-serif;*/
+}
+@keyframes smoothTransition {
+    0% {
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 25% 50%;
+    }
+    50% {
+        background-position: 50% 100%;
+    }
+    75% {
+        background-position: 75% 50%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+/*Floating Stars */
+
+#star-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.star{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: white;/*star color*/
+    clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+    );
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.5;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes moveStar {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(calc(-50vw + 60vw * var(--random-x)), calc(-20vh + 40vh * var(--random-y)));
+    }
+}
+
+/*Polaroid Photo*/
+#polaroid-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+}
+
+.polaroid {
+    width: 300px;
+    height: 350px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    position: relative;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0,0.2);
+    border: 5px solid #fff;
+}
+
+.polaroid img{
+    width: 100%;
+    height: 80%;
+    display: block;
+    object-fit: cover;
+}
+
+.polaroid .front, .polaroid .back {
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.polaroid .back {
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffe4c4;
+    font-size: 16px;
+}
+
+/*Flip Effect*/
+.polaroid:hover{
+    cursor: pointer;
+    z-index: 101;
+}
+
+@keyframes float {
+    0%{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-20px);
+    }
+    100%{
+        transform: translateY(0);
+    }
+}
